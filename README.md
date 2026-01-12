@@ -1,28 +1,7 @@
-# Online-Kompilierung  
-  
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/Jason2866/LIVY_RING_G2-Tasmota)
-   
-
-# Vorwort
- :warning: **Batteriebetrieb aktuell und in absehbarer Zeit nicht möglich**   
-   
- :warning: **Es gibt keine Garantie das alle Sensoren in Tasmota implementiert werden können**  
-
-
-Sobald ihr den ESP flashed, gibt es kein zurück auf den Ursprungszustand, außer Ihr sichert euch evtl. den Flash (habe ich weder gemacht noch getestet).
-Ich übernehme keine Haftung für irgendwas ;)  
-  
-Bitte entfernt für die Tests die drei LiPo Batterien, achtet auf die korrekte Polung!
-
-# Compilierte Version
-Die fertige Version zum direkten flashen findet ihr hier:
-https://github.com/Jason2866/LIVY_RING_G2-Tasmota/raw/work/build_output/firmware/tasmota32.bin
+Mein Versuch einer aktuellen Tasmota Version mit möglichst allen nützlichen Sensoren integriert!
 
 PIN-Layout ESP32-WROOM-32X
 https://tasmota.github.io/docs/Pinouts/#esp32-wroom-32x
-
-Ich versuche die custom libarys aufzuräumen und per git Push in tasmota zu integrieren.
-Damit könnt ihr immer die neuste tasmota Version kompilieren.
 
 ## Was funktioniert?
 - [Tasmota](https://github.com/arendst/Tasmota) und alle seinen Funktionen :)
@@ -48,27 +27,6 @@ Damit könnt ihr immer die neuste tasmota Version kompilieren.
 - Vier Kreuzschlitzschrauben entfernen (am besten die Löcher mit einem Schranubenzieher ertasten)
 - Ring entfernen
 
-
-## Update  
-Wenn ihr einmal geflashed habt und das Webinterface von Tasmota erreichbar ist könnt ihr die Binary hier im Repo über das Webinterface -> Firmware Update hochladen.  
-**Bei Problemen nach dem Update bitte "Konfiguration zurücksetzen"**  
-
-
-## Flashen
-!!!! Batterien entfernen !!!!
-
-~~ Was ihr braucht ~~
-- Einen USB TTL Adapter oder ein anderes Gerät mit TTL USB RX TX Schnittstelle
-- Tasmota Binary livyringg2tasmo.bin aus diesem Repository
-- Tasmota "Flash-Files" https://github.com/arendst/Tasmota/tree/firmware/firmware/tasmota32/ESP32_needed_files
-- Flasher Linux https://github.com/espressif/esptool 
-- oder Flasher Windows (Müsst ihr probieren, hier die originale Anleitung: https://tasmota.github.io/docs/ESP32/#flashing)
-
-~~ Vorbereitung ~~  
-
-livyringg2tasmo.bin und alle vier Flasfiles in den selben Ordner wie das Flash-Tool ablegen.
-Ich habe für das Flashen die Kabel direkt an die Pins des ESP-Chip rangehalten, mit etwas Geduld hat es dann funktioniert ;)
-
 ~~ Flashen ~~  
 - gpio0 mit GND verbinden (am einfachsten das Gehäuse des PushButton als GND nehmen)
 - ESP32 starten (USB Kabel verbinden)
@@ -76,12 +34,7 @@ Ich habe für das Flashen die Kabel direkt an die Pins des ESP-Chip rangehalten,
 - gpio0 Verbindung zu GND trennen
 - gpio1 mit dem TTL-Modul RX verbinden
 - gpio3 mit dem TTL-Modul TX verbinden
-- Kommando ausführen: 
-```
-esptool.py --chip esp32 --port COM4 --baud 921600 --before default_reset --after hard_reset write_flash -z --flash_mode dout --flash_freq 40m --flash_size detect 0x1000 bootloader_dout_40m.bin 0x8000 partitions.bin 0xe000 boot_app0.bin 0x10000 livyringg2tasmo.bin
-```
-- Wenn der Flasher erfolg vermeldet hat, den ESP neu starten und es sollte ein Tasmota WLAN für die weitere Einrichtung erscheinen.
-- Im Webinterface unter "Einstellungen" -> "Gerät" -> "Gerätetyp" LivyRing auswählen und unten mit "speichern" bestätigen.
+- Mit beliebigem Flasher flashen
 
 
 ## Einstellungen Tasmota  
